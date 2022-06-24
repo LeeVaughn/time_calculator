@@ -35,6 +35,9 @@ def add_time(start, duration, day=None):
     elif total_hours <= 24:
         new_time = str(total_hours - 12) + ':' + new_minutes + ' PM'
 
+    if day != None:
+        new_time = new_time + ', ' + day
+
     # print(hour)
     # print(new_minutes)
     # print(days)
@@ -46,4 +49,4 @@ def add_time(start, duration, day=None):
     print(new_time)
     return new_time
 
-add_time("11:43 AM", "00:20")
+add_time("11:43 AM", "00:20", "Monday")
