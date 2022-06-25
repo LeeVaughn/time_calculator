@@ -8,20 +8,24 @@ def add_time(start, duration, day=None):
     new_minutes = 0
     new_hours = 0
     new_time = None
+    days_list = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 
     # convert time to military equivalent
     if am_pm == 'PM':
         hour += 12
 
+    # calculate total hours and minutes
     total_hours = hour + hours_to_add
     total_minutes = minutes + minutes_to_add
 
+    # add to the total hours if there are more than 60 total minutes
     if total_minutes > 60:
         total_hours += 1
         new_minutes = total_minutes - 60
     else:
         new_minutes = total_minutes
 
+    # add 0 it minutes are single digits
     if new_minutes < 10:
         new_minutes = '0' + str(new_minutes)
     else:
@@ -34,6 +38,7 @@ def add_time(start, duration, day=None):
     else:
         new_hours = total_hours
     
+    # set time
     if new_hours < 12:
         new_time = str(new_hours) + ':' + new_minutes + ' AM'
 
@@ -45,6 +50,9 @@ def add_time(start, duration, day=None):
         if new_hours == 12:
             new_time = '12:' + new_minutes + ' PM'
 
+    print(days)
+
+    # set time id day is included
     if day != None:
         new_time = new_time + ', ' + day
     elif days == 1:
