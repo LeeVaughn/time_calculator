@@ -50,12 +50,24 @@ def add_time(start, duration, day=None):
         if new_hours == 12:
             new_time = '12:' + new_minutes + ' PM'
 
-    print(days)
+    # print('days', days)
+
+    if day != None:
+        day_index = days_list.index(day.lower())
+        new_day_index = (day_index + days)
+        # print('new index', new_day_index)
+
+        if new_day_index > 6:
+            new_day_index = new_day_index - (days + 1)
+        new_day = days_list[new_day_index]
+
 
     # set time id day is included
     if day != None:
-        new_time = new_time + ', ' + day
-    elif days == 1:
+        # print(new_day_index)
+        new_time = new_time + ', ' + new_day.capitalize()
+
+    if days == 1:
         new_time = new_time + ' (next day)'
     elif days >= 2:
         new_time = new_time + f' ({days} days later)'
@@ -75,3 +87,5 @@ add_time("11:43 PM", "24:20", "tueSday")
 # Returns: 12:03 AM, Thursday (2 days later)
 add_time("6:30 PM", "205:12")
 # Returns: 7:42 AM (9 days later)
+add_time("8:16 PM", "466:02", "tuesday")
+# Returns: 6:18 AM, Monday (20 days later)
