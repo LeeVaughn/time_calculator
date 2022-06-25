@@ -33,6 +33,7 @@ def add_time(start, duration, day=None):
 
     days = total_hours // 24
 
+    # adjust total hours based on number of days
     if total_hours > 24:
         new_hours = total_hours - (days * 24)
     else:
@@ -40,40 +41,39 @@ def add_time(start, duration, day=None):
     
     # set time
     if new_hours < 12:
-        new_time = str(new_hours) + ':' + new_minutes + ' AM'
-
         if new_hours == 0:
             new_time = '12:' + new_minutes + ' AM'
+        else:
+            new_time = str(new_hours) + ':' + new_minutes + ' AM'
     elif new_hours < 24:
-        new_time = str(new_hours - 12) + ':' + new_minutes + ' PM'
-
         if new_hours == 12:
             new_time = '12:' + new_minutes + ' PM'
+        else:
+            new_time = str(new_hours - 12) + ':' + new_minutes + ' PM'
 
-    # print('days', days)
-
+    # set new day
     if day != None:
         day_index = days_list.index(day.lower())
         new_day_index = (day_index + days)
-        # print('new index', new_day_index)
 
         if new_day_index > 6:
             new_day_index = new_day_index - (days + 1)
         new_day = days_list[new_day_index]
 
 
-    # set time id day is included
+    # set time if day is included
     if day != None:
         # print(new_day_index)
         new_time = new_time + ', ' + new_day.capitalize()
 
+    # set time with additional info
     if days == 1:
         new_time = new_time + ' (next day)'
     elif days >= 2:
         new_time = new_time + f' ({days} days later)'
 
-    print(new_time)
     return new_time
+
 
 add_time("3:00 PM", "3:10")
 # Returns: 6:10 PM
